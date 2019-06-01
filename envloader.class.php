@@ -10,16 +10,26 @@ class EnvLoader
      * Load the .env file
      *
      * @param string $path Path to the .env file
+     * @param boolean $search Specifies if the loader should search automatically for the .env file
      */
-    private static function getFile($path = null)
+    private static function getFile($path = null, $search = true)
     {
         // Set path to document root if no path is given
         $path = ($path ? $path : $_SERVER['DOCUMENT_ROOT']);
+        $file = $path . '/.env';
+        $data = [];
 
-        // Load .env file (as ini)
-        $file = parse_ini_file($path . '/.env');
+        // Search for the .env file if the file is not in the current path and auto search it active
+        if (!file_exists($file) && $search) {
+            $file = self::searchFile($path);
+        }
 
-        return $file;
+        // Load .env file (as ini) if the file was found
+        if (file_exists($file)) {
+            $data = parse_ini_file($file);
+        }
+
+        return $data;
     }
 
     /**
@@ -92,5 +102,36 @@ class EnvLoader
     private static function loadServer($name, $value)
     {
         $_SERVER[$name] = $value;
+    }
+
+    /**
+     * Search for the .env file
+     *
+     * @param string $path Current path
+     * @return string Returns the path to the .env file
+     */
+    private static function searchFile($path = null)
+    {
+        $path = ($path ? $path : $_SERVER['DOCUMENT_ROOT']);
+        $file = $path . '/.env';
+
+        // Check if the file is in the current folder
+        if (file_exists($file)) {
+            return $file;
+        }
+
+        $folders = glob($path . '/*', GLOB_ONLYDIR);
+        $file = false;
+
+        // Search trough the folders
+        foreach ($folders as $folder) {
+            $file = self::searchFile($folder);
+
+            if (file_exists($file)) {
+                break;
+            }
+        }
+        
+        return $file;
     }
 }
