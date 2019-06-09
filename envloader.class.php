@@ -16,7 +16,7 @@ class EnvLoader
     {
         // Set path to document root if no path is given
         $path = ($path ? $path : $_SERVER['DOCUMENT_ROOT']);
-        $file = $path . '/.env';
+        $file = $path . '/../.env';
         $data = [];
 
         // Search for the .env file if the file is not in the current path and auto search it active
