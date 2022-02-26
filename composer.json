@@ -1,0 +1,19 @@
+{
+  "name": "adistoe/env-loader",
+  "description": "A loader for environment variables",
+  "type": "library",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "adistoe"
+    }
+  ],
+  "require": {
+    "php": ">=7.4"
+  },
+  "autoload": {
+    "psr-4": {
+      "adistoe\\": "src/"
+    }
+  }
+}
