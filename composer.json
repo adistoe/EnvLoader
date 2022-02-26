@@ -5,7 +5,8 @@
   "license": "MIT",
   "authors": [
     {
-      "name": "adistoe"
+      "name": "adistoe",
+      "homepage": "https://www.adistoe.ch"
     }
   ],
   "require": {
