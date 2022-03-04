@@ -1,6 +1,12 @@
 # EnvLoader
 A PHP class to load environment variables from .env files
 
+## Installation
+Install it using composer:
+```
+composer require adistoe/env-loader
+```
+
 ## Getting Started
 Create a .env file or copy the .env.example (rename it to .env) and modify it as needed.\
 Then you can load the file with the following code:
