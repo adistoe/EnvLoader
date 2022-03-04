@@ -32,7 +32,11 @@ class EnvLoader
     private static function getFile(string $path = null): array
     {
         // Set path to document root if no path is given
-        $path = rtrim($path ?? $_SERVER['DOCUMENT_ROOT'], '/');
+        $path = preg_replace(
+            '/\/.env$/',
+            '',
+            rtrim($path ?? $_SERVER['DOCUMENT_ROOT'], '/')
+        );
         $file = $path . '/.env';
         $data = [];
 
@@ -52,10 +56,10 @@ class EnvLoader
     /**
      * Search for the .env file
      *
-     * @param ?string $path Current path
+     * @param string $path Current path
      * @return string Returns the path to the .env file
      */
-    private static function searchFile(string $path)
+    private static function searchFile(string $path): string
     {
         $file = $path . '/.env';
 
