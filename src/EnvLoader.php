@@ -12,7 +12,7 @@ class EnvLoader
      *
      * @param ?string $path Path to the .env file
      */
-    public static function load(string $path = null): void
+    public static function load(?string $path = null): void
     {
         // Get .env variables
         $vars = self::getFile($path);
@@ -29,7 +29,7 @@ class EnvLoader
      * @param ?string $path Path to the .env file
      * @return array
      */
-    private static function getFile(string $path = null): array
+    private static function getFile(?string $path = null): array
     {
         // Set path to document root if no path is given
         $path = preg_replace(
